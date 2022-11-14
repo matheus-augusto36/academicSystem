@@ -32,6 +32,7 @@ public class CourseClass implements Serializable {
 	@OneToMany(mappedBy = "courseClass")
 	private List<Registration> registrations = new ArrayList<>();
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "course_id")
 	private Course course;

@@ -26,11 +26,10 @@ public class Course implements Serializable {
 	private Integer semesters;
 	private Double price;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "course")
 	private Set<CourseClass> classes = new HashSet<>();
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "id.course")
 	private Set<SubjectRegistration> subjects = new HashSet<>();
 	
@@ -88,6 +87,10 @@ public class Course implements Serializable {
 	
 	public void addCourseClass(CourseClass courseClass) {
 		classes.add(courseClass);
+	}
+	
+	public void addSubject(SubjectRegistration subjectRegistration) {
+		subjects.add(subjectRegistration);
 	}
 	
 	@Override

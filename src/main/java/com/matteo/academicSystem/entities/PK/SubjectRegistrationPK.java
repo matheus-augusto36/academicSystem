@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matteo.academicSystem.entities.Course;
 import com.matteo.academicSystem.entities.Subject;
 
@@ -14,10 +15,12 @@ import com.matteo.academicSystem.entities.Subject;
 public class SubjectRegistrationPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "course_id")
 	private Course course;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "subject_id")
 	private Subject subject;

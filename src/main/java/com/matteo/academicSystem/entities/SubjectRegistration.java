@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matteo.academicSystem.entities.PK.SubjectRegistrationPK;
 
 @Entity
@@ -22,6 +23,15 @@ public class SubjectRegistration {
 	public SubjectRegistration(Course course, Subject subject) {
 		id.setCourse(course);
 		id.setSubject(subject);
+	}
+	
+	@JsonIgnore
+	public Course getCourse() {
+		return id.getCourse();
+	}
+	
+	public Subject getSubject() {
+		return id.getSubject();
 	}
 
 	@Override

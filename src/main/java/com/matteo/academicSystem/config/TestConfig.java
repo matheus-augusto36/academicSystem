@@ -74,6 +74,10 @@ public class TestConfig implements CommandLineRunner {
 		SubjectRegistration sr2 = new SubjectRegistration(course1, sbj2);
 		srRepository.saveAll(Arrays.asList(sr1, sr2));
 		
+		course1.addSubject(sr1);
+		course1.addSubject(sr2);
+		courseRepository.save(course1);
+		
 		Registration rg1 = new Registration(null);
 		Registration rg2 = new Registration(null);
 		rg1.setCourseClass(cc1);
