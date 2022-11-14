@@ -13,13 +13,13 @@ import com.matteo.academicSystem.entities.PK.SubjectRegistrationPK;
 public class SubjectRegistration {
 
 	@EmbeddedId
-	private SubjectRegistrationPK id;
+	private SubjectRegistrationPK id = new SubjectRegistrationPK();
 	
-	private SubjectRegistration() {
+	public SubjectRegistration() {
 		
 	}
 	
-	private SubjectRegistration(Course course, Subject subject) {
+	public SubjectRegistration(Course course, Subject subject) {
 		id.setCourse(course);
 		id.setSubject(subject);
 	}

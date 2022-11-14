@@ -2,8 +2,10 @@ package com.matteo.academicSystem.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,11 @@ public class Course implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "course")
-	private List<CourseClass> classes = new ArrayList<>();
+	private Set<CourseClass> classes = new HashSet<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.course")
+	private Set<SubjectRegistration> subjects = new HashSet<>();
 	
 	public Course(Long id, String name, Integer semesters, Double price) {
 		super();
@@ -72,14 +78,18 @@ public class Course implements Serializable {
 		this.price = price;
 	}
 	
-	public List<CourseClass> getClasses() {
+	public Set<CourseClass> getClasses() {
 		return classes;
+	}
+	
+	public Set<SubjectRegistration> getSubjects() {
+		return subjects;
 	}
 	
 	public void addCourseClass(CourseClass courseClass) {
 		classes.add(courseClass);
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

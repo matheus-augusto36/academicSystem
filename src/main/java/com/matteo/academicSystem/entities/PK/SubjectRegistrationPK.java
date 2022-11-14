@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.matteo.academicSystem.entities.Course;
 import com.matteo.academicSystem.entities.Subject;
@@ -12,18 +14,13 @@ import com.matteo.academicSystem.entities.Subject;
 public class SubjectRegistrationPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@ManyToOne
+	@JoinColumn(name = "course_id")
 	private Course course;
+	
+	@ManyToOne
+	@JoinColumn(name = "subject_id")
 	private Subject subject;
-	
-	public SubjectRegistrationPK(Course course, Subject subject) {
-		super();
-		this.course = course;
-		this.subject = subject;
-	}
-	
-	public SubjectRegistrationPK() {
-		
-	}
 
 	public Course getCourse() {
 		return course;

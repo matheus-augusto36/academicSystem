@@ -13,11 +13,13 @@ import com.matteo.academicSystem.entities.CourseClass;
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.entities.Student;
 import com.matteo.academicSystem.entities.Subject;
+import com.matteo.academicSystem.entities.SubjectRegistration;
 import com.matteo.academicSystem.entities.Teacher;
 import com.matteo.academicSystem.repositories.CourseClassRepository;
 import com.matteo.academicSystem.repositories.CourseRepository;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
 import com.matteo.academicSystem.repositories.StudentRepository;
+import com.matteo.academicSystem.repositories.SubjectRegistrationRepository;
 import com.matteo.academicSystem.repositories.SubjectRepository;
 import com.matteo.academicSystem.repositories.TeacherRepository;
 
@@ -42,6 +44,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private TeacherRepository tchRepository;
+	
+	@Autowired
+	private SubjectRegistrationRepository srRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -64,6 +69,10 @@ public class TestConfig implements CommandLineRunner {
 		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação", 7.0);
 		
 		sbRepository.saveAll(Arrays.asList(sbj1, sbj2));
+		
+		SubjectRegistration sr1 = new SubjectRegistration(course1, sbj1);
+		SubjectRegistration sr2 = new SubjectRegistration(course1, sbj2);
+		srRepository.saveAll(Arrays.asList(sr1, sr2));
 		
 		Registration rg1 = new Registration(null);
 		Registration rg2 = new Registration(null);
