@@ -1,13 +1,18 @@
 package com.matteo.academicSystem.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class CourseClass implements Serializable {
@@ -21,17 +26,16 @@ public class CourseClass implements Serializable {
 	private Date startDate;
 	private Integer vacancies;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "courseClass")
+	private List<Registration> registrations = new ArrayList<>();
+	
 	public CourseClass(Long id, Integer number, Date startDate, Integer vacancies) {
 		super();
 		this.id = id;
 		this.number = number;
 		this.startDate = startDate;
 		this.vacancies = vacancies;
-	}
-	
-	public CourseClass(Long id) {
-		super();
-		this.id = id;
 	}
 	
 	public CourseClass() {
@@ -70,6 +74,14 @@ public class CourseClass implements Serializable {
 		this.vacancies = vacancies;
 	}
 
+	public List<Registration> getRegistrations() {
+		return registrations;
+	}
+	
+	public void addRegistration(Registration registration) {
+		registrations.add(registration);
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

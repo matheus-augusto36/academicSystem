@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,6 +24,10 @@ public class Registration implements Serializable {
 	@JsonIgnore
 	@OneToOne(mappedBy = "registration")
 	private Student student;
+	
+	@ManyToOne
+	@JoinColumn(name = "courseClass_id")
+	private CourseClass courseClass;
 
 	public Registration(Long id, Student student) {
 		super();
@@ -48,6 +54,14 @@ public class Registration implements Serializable {
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	
+	public CourseClass getCourseClass() {
+		return courseClass;
+	}
+
+	public void setCourseClass(CourseClass courseClass) {
+		this.courseClass = courseClass;
 	}
 
 	@Override

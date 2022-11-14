@@ -31,12 +31,19 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		CourseClass cc1 = new CourseClass(null);
+		CourseClass cc1 = new CourseClass(null, 1, new Date(), 40);
+		ccRepository.save(cc1);
 		
 		Registration rg1 = new Registration(null);
 		Registration rg2 = new Registration(null);
-		
+		rg1.setCourseClass(cc1);
+		rg2.setCourseClass(cc1);
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
+		
+		cc1.addRegistration(rg1);
+		cc1.addRegistration(rg2);
+		ccRepository.save(cc1);
+		
 		
 		Student st1 = new Student(null, "Geralt of rivia", "123456789", new Date(), rg1);
 		Student st2 = new Student(null, "Vesemir", "123456789", new Date(), rg2);
@@ -47,7 +54,7 @@ public class TestConfig implements CommandLineRunner {
 		rg2.setStudent(st2);
 		
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
-		ccRepository.save(cc1);
+		
 	}
 
 }
