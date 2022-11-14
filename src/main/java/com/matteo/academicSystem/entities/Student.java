@@ -30,12 +30,13 @@ public class Student implements Serializable {
 		
 	}
 
-	public Student(Long id, String name, String cpf, Date birthDate) {
+	public Student(Long id, String name, String cpf, Date birthDate, Registration registration) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.birthDate = birthDate;
+		setRegistration(registration);
 	}
 
 	public Long getId() {
@@ -68,6 +69,14 @@ public class Student implements Serializable {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	public Registration getRegistration() {
+		return registration;
+	}
+
+	public void setRegistration(Registration registration) {
+		this.registration = registration;
 	}
 
 	@Override
