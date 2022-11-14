@@ -13,11 +13,13 @@ import com.matteo.academicSystem.entities.CourseClass;
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.entities.Student;
 import com.matteo.academicSystem.entities.Subject;
+import com.matteo.academicSystem.entities.Teacher;
 import com.matteo.academicSystem.repositories.CourseClassRepository;
 import com.matteo.academicSystem.repositories.CourseRepository;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
 import com.matteo.academicSystem.repositories.StudentRepository;
 import com.matteo.academicSystem.repositories.SubjectRepository;
+import com.matteo.academicSystem.repositories.TeacherRepository;
 
 @Configuration
 @Profile("test")
@@ -37,6 +39,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private SubjectRepository sbRepository;
+	
+	@Autowired
+	private TeacherRepository tchRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -50,6 +55,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		course1.addCourseClass(cc1);
 		courseRepository.save(course1);
+		
+		Teacher tch1 = new Teacher(null, "Vesemir", "987654321");
+		
+		tchRepository.save(tch1);
 		
 		Subject sbj1 = new Subject(null, "Estatística", "Mexer com gráfico e tabela", 7.0);
 		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação", 7.0);
@@ -67,8 +76,8 @@ public class TestConfig implements CommandLineRunner {
 		ccRepository.save(cc1);
 		
 		
-		Student st1 = new Student(null, "Geralt of rivia", "123456789", new Date(), rg1);
-		Student st2 = new Student(null, "Vesemir", "123456789", new Date(), rg2);
+		Student st1 = new Student(null, "Geralt of Rivia", "123456789", new Date(), rg1);
+		Student st2 = new Student(null, "Eskel", "123456789", new Date(), rg2);
 		
 		stdRepository.saveAll(Arrays.asList(st1,st2));
 		
