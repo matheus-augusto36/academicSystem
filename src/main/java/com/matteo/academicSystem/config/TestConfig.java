@@ -12,10 +12,12 @@ import com.matteo.academicSystem.entities.Course;
 import com.matteo.academicSystem.entities.CourseClass;
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.entities.Student;
+import com.matteo.academicSystem.entities.Subject;
 import com.matteo.academicSystem.repositories.CourseClassRepository;
 import com.matteo.academicSystem.repositories.CourseRepository;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
 import com.matteo.academicSystem.repositories.StudentRepository;
+import com.matteo.academicSystem.repositories.SubjectRepository;
 
 @Configuration
 @Profile("test")
@@ -32,6 +34,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private CourseRepository courseRepository;
+	
+	@Autowired
+	private SubjectRepository sbRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -46,7 +51,11 @@ public class TestConfig implements CommandLineRunner {
 		course1.addCourseClass(cc1);
 		courseRepository.save(course1);
 		
-		/*
+		Subject sbj1 = new Subject(null, "Estatística", "Mexer com gráfico e tabela", 7.0);
+		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação", 7.0);
+		
+		sbRepository.saveAll(Arrays.asList(sbj1, sbj2));
+		
 		Registration rg1 = new Registration(null);
 		Registration rg2 = new Registration(null);
 		rg1.setCourseClass(cc1);
@@ -67,7 +76,7 @@ public class TestConfig implements CommandLineRunner {
 		rg2.setStudent(st2);
 		
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
-		*/
+		
 	}
 
 }
