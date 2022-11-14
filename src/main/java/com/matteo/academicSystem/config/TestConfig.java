@@ -8,8 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.matteo.academicSystem.entities.CourseClass;
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.entities.Student;
+import com.matteo.academicSystem.repositories.CourseClassRepository;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
 import com.matteo.academicSystem.repositories.StudentRepository;
 
@@ -18,13 +20,18 @@ import com.matteo.academicSystem.repositories.StudentRepository;
 public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
-	StudentRepository stdRepository;	
+	private StudentRepository stdRepository;	
 	
 	@Autowired
-	RegistrationRepository rgRepository;
+	private RegistrationRepository rgRepository;
+	
+	@Autowired
+	private CourseClassRepository ccRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		CourseClass cc1 = new CourseClass(null);
 		
 		Registration rg1 = new Registration(null);
 		Registration rg2 = new Registration(null);
@@ -40,7 +47,7 @@ public class TestConfig implements CommandLineRunner {
 		rg2.setStudent(st2);
 		
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
-		// stdRepository.saveAll(Arrays.asList(st1,st2));
+		ccRepository.save(cc1);
 	}
 
 }
