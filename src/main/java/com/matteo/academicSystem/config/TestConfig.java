@@ -8,10 +8,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.matteo.academicSystem.entities.Course;
 import com.matteo.academicSystem.entities.CourseClass;
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.entities.Student;
 import com.matteo.academicSystem.repositories.CourseClassRepository;
+import com.matteo.academicSystem.repositories.CourseRepository;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
 import com.matteo.academicSystem.repositories.StudentRepository;
 
@@ -27,9 +29,17 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private CourseClassRepository ccRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Course course1 = new Course(null, "ADS", 6, 10000.0);
+		
+		courseRepository.save(course1);
+		
 		
 		CourseClass cc1 = new CourseClass(null, 1, new Date(), 40);
 		ccRepository.save(cc1);
