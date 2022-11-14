@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Student implements Serializable {
@@ -19,6 +21,10 @@ public class Student implements Serializable {
 	private String name;
 	private String cpf;
 	private Date birthDate;
+	
+	@OneToOne
+	@JoinColumn(name = "registration_id")
+	private Registration registration;
 	
 	public Student() {
 		
