@@ -1,12 +1,17 @@
 package com.matteo.academicSystem.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Course implements Serializable {
@@ -18,6 +23,10 @@ public class Course implements Serializable {
 	private String name;
 	private Integer semesters;
 	private Double price;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "course")
+	private List<CourseClass> classes = new ArrayList<>();
 	
 	public Course(Long id, String name, Integer semesters, Double price) {
 		super();
@@ -47,11 +56,11 @@ public class Course implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getsemesters() {
+	public Integer getSemesters() {
 		return semesters;
 	}
 
-	public void setsemesters(Integer hours) {
+	public void setSemesters(Integer hours) {
 		this.semesters = hours;
 	}
 
@@ -61,6 +70,14 @@ public class Course implements Serializable {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	public List<CourseClass> getClasses() {
+		return classes;
+	}
+	
+	public void addCourseClass(CourseClass courseClass) {
+		classes.add(courseClass);
 	}
 
 	@Override

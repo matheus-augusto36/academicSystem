@@ -40,10 +40,13 @@ public class TestConfig implements CommandLineRunner {
 		
 		courseRepository.save(course1);
 		
-		
-		CourseClass cc1 = new CourseClass(null, 1, new Date(), 40);
+		CourseClass cc1 = new CourseClass(null, 1, new Date(), 40, course1);
 		ccRepository.save(cc1);
 		
+		course1.addCourseClass(cc1);
+		courseRepository.save(course1);
+		
+		/*
 		Registration rg1 = new Registration(null);
 		Registration rg2 = new Registration(null);
 		rg1.setCourseClass(cc1);
@@ -64,7 +67,7 @@ public class TestConfig implements CommandLineRunner {
 		rg2.setStudent(st2);
 		
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
-		
+		*/
 	}
 
 }

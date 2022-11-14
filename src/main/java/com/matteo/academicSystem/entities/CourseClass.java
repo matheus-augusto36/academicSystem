@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,12 +32,17 @@ public class CourseClass implements Serializable {
 	@OneToMany(mappedBy = "courseClass")
 	private List<Registration> registrations = new ArrayList<>();
 	
-	public CourseClass(Long id, Integer number, Date startDate, Integer vacancies) {
+	@ManyToOne
+	@JoinColumn(name = "course_id")
+	private Course course;
+	
+	public CourseClass(Long id, Integer number, Date startDate, Integer vacancies, Course course) {
 		super();
 		this.id = id;
 		this.number = number;
 		this.startDate = startDate;
 		this.vacancies = vacancies;
+		setCourse(course);
 	}
 	
 	public CourseClass() {
@@ -82,6 +89,14 @@ public class CourseClass implements Serializable {
 		registrations.add(registration);
 	}
 	
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
