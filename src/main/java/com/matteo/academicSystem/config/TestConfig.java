@@ -15,6 +15,7 @@ import com.matteo.academicSystem.entities.Student;
 import com.matteo.academicSystem.entities.Subject;
 import com.matteo.academicSystem.entities.SubjectRegistration;
 import com.matteo.academicSystem.entities.Teacher;
+import com.matteo.academicSystem.entities.Test;
 import com.matteo.academicSystem.repositories.CourseClassRepository;
 import com.matteo.academicSystem.repositories.CourseRepository;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
@@ -22,6 +23,7 @@ import com.matteo.academicSystem.repositories.StudentRepository;
 import com.matteo.academicSystem.repositories.SubjectRegistrationRepository;
 import com.matteo.academicSystem.repositories.SubjectRepository;
 import com.matteo.academicSystem.repositories.TeacherRepository;
+import com.matteo.academicSystem.repositories.TestRepository;
 
 @Configuration
 @Profile("test")
@@ -47,6 +49,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private SubjectRegistrationRepository srRepository;
+	
+	@Autowired
+	private TestRepository tstRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -102,6 +107,12 @@ public class TestConfig implements CommandLineRunner {
 		rg2.setStudent(st2);
 		
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
+		
+		Test tst1 = new Test(null, 10.0, new Date(), 1);
+		Test tst2 = new Test(null, 10.0, new Date(), 1);
+		Test tst3 = new Test(null, 10.0, new Date(), 2);
+		
+		tstRepository.saveAll(Arrays.asList(tst1, tst2, tst3));
 		
 	}
 
