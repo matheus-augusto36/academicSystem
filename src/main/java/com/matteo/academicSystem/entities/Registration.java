@@ -21,10 +21,11 @@ public class Registration implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonIgnore
+
 	@OneToOne(mappedBy = "registration")
 	private Student student;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "courseClass_id")
 	private CourseClass courseClass;
