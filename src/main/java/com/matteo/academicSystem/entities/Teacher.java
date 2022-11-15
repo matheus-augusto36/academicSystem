@@ -1,12 +1,15 @@
 package com.matteo.academicSystem.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Teacher implements Serializable {
@@ -17,6 +20,9 @@ public class Teacher implements Serializable {
 	private Long id;	
 	private String name;
 	private String cpf;
+	
+	@OneToMany(mappedBy = "teacher")
+	private Set<Subject> subjects = new HashSet<>();
 	
 	public Teacher(Long id, String name, String cpf) {
 		super();
@@ -51,6 +57,10 @@ public class Teacher implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public void addSubject(Subject subject) {
+		subjects.add(subject);
 	}
 
 	@Override

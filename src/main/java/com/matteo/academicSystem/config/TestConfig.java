@@ -65,10 +65,14 @@ public class TestConfig implements CommandLineRunner {
 		
 		tchRepository.save(tch1);
 		
-		Subject sbj1 = new Subject(null, "Estatística", "Mexer com gráfico e tabela", 7.0);
-		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação", 7.0);
+		Subject sbj1 = new Subject(null, "Estatística", "Mexer com gráfico e tabela", 7.0, tch1);
+		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação", 7.0, tch1);
 		
 		sbRepository.saveAll(Arrays.asList(sbj1, sbj2));
+		
+		tch1.addSubject(sbj1);
+		tch1.addSubject(sbj2);
+		tchRepository.save(tch1);
 		
 		SubjectRegistration sr1 = new SubjectRegistration(course1, sbj1);
 		SubjectRegistration sr2 = new SubjectRegistration(course1, sbj2);
