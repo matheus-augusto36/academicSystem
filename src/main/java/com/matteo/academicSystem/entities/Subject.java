@@ -1,6 +1,8 @@
 package com.matteo.academicSystem.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -9,8 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Subject implements Serializable {
@@ -26,6 +27,9 @@ public class Subject implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
+	
+	@OneToMany(mappedBy = "subject")
+	private List<Test> tests = new ArrayList<>();
 	
 	public Subject(Long id, String name, String description, Double minimumScore, Teacher teacher) {
 		super();
@@ -78,6 +82,14 @@ public class Subject implements Serializable {
 
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
+	}
+	
+	public List<Test> getTests() {
+		return tests;
+	}
+	
+	public void addTest(Test test) {
+		tests.add(test);
 	}
 
 	@Override

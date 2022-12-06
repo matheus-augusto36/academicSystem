@@ -73,12 +73,23 @@ public class TestConfig implements CommandLineRunner {
 		Subject sbj1 = new Subject(null, "Estatística", "Mexer com gráfico e tabela", 7.0, tch1);
 		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação", 7.0, tch1);
 		
-		sbRepository.saveAll(Arrays.asList(sbj1, sbj2));
-		
 		tch1.addSubject(sbj1);
 		tch1.addSubject(sbj2);
 		tchRepository.save(tch1);
 		
+		sbRepository.saveAll(Arrays.asList(sbj1, sbj2));
+		
+		Test tst1 = new Test(null, 10.0, new Date(), 1, sbj1);
+		Test tst2 = new Test(null, 10.0, new Date(), 1, sbj2);
+		Test tst3 = new Test(null, 10.0, new Date(), 2, sbj1);
+		
+		sbj1.addTest(tst1);
+		sbj1.addTest(tst3);
+		sbj2.addTest(tst2);
+		
+		tstRepository.saveAll(Arrays.asList(tst1, tst2, tst3));
+		sbRepository.saveAll(Arrays.asList(sbj1, sbj2));
+			
 		SubjectRegistration sr1 = new SubjectRegistration(course1, sbj1);
 		SubjectRegistration sr2 = new SubjectRegistration(course1, sbj2);
 		srRepository.saveAll(Arrays.asList(sr1, sr2));
@@ -107,12 +118,6 @@ public class TestConfig implements CommandLineRunner {
 		rg2.setStudent(st2);
 		
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
-		
-		Test tst1 = new Test(null, 10.0, new Date(), 1);
-		Test tst2 = new Test(null, 10.0, new Date(), 1);
-		Test tst3 = new Test(null, 10.0, new Date(), 2);
-		
-		tstRepository.saveAll(Arrays.asList(tst1, tst2, tst3));
 		
 	}
 
