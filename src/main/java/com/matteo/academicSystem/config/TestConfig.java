@@ -12,6 +12,7 @@ import com.matteo.academicSystem.entities.Course;
 import com.matteo.academicSystem.entities.CourseClass;
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.entities.Student;
+import com.matteo.academicSystem.entities.StudentTest;
 import com.matteo.academicSystem.entities.Subject;
 import com.matteo.academicSystem.entities.SubjectRegistration;
 import com.matteo.academicSystem.entities.Teacher;
@@ -20,6 +21,7 @@ import com.matteo.academicSystem.repositories.CourseClassRepository;
 import com.matteo.academicSystem.repositories.CourseRepository;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
 import com.matteo.academicSystem.repositories.StudentRepository;
+import com.matteo.academicSystem.repositories.StudentTestRepository;
 import com.matteo.academicSystem.repositories.SubjectRegistrationRepository;
 import com.matteo.academicSystem.repositories.SubjectRepository;
 import com.matteo.academicSystem.repositories.TeacherRepository;
@@ -52,6 +54,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private TestRepository tstRepository;
+	
+	@Autowired
+	private StudentTestRepository sttsRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -108,17 +113,21 @@ public class TestConfig implements CommandLineRunner {
 		cc1.addRegistration(rg2);
 		ccRepository.save(cc1);
 		
-		
 		Student st1 = new Student(null, "Geralt of Rivia", "123456789", new Date(), rg1);
 		Student st2 = new Student(null, "Eskel", "123456789", new Date(), rg2);
 		
 		stdRepository.saveAll(Arrays.asList(st1,st2));
+		
 		
 		rg1.setStudent(st1);
 		rg2.setStudent(st2);
 		
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
 		
+		StudentTest stt1 = new StudentTest(tst1, st1);
+		StudentTest stt2 = new StudentTest(tst1, st2);
+		
+		sttsRepository.saveAll(Arrays.asList(stt1, stt2));
 	}
 
 }
