@@ -23,4 +23,8 @@ public class StudentService {
 		Optional<Student> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public Student insert(Student obj) {
+		return repository.save(obj);
+	}
 }
