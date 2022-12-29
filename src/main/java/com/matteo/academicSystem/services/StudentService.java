@@ -31,4 +31,16 @@ public class StudentService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public Student update(Long id, Student obj) {
+		Student entity = repository.getReferenceById(id);
+		updateData(entity, id);
+		return repository.save(entity);
+	}
+
+	private void updateData(Student entity, Long id) {
+		entity.setName(findById(id).getName());
+		entity.setCpf(findById(id).getCpf());
+		entity.setBirthDate(findById(id).getBirthDate());
+	}
 }
