@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.matteo.academicSystem.entities.Student;
 import com.matteo.academicSystem.repositories.StudentRepository;
+import com.matteo.academicSystem.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class StudentService {
@@ -21,7 +22,7 @@ public class StudentService {
 	
 	public Student findById(Long id) {
 		Optional<Student> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Student insert(Student obj) {
