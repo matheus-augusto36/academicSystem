@@ -44,13 +44,13 @@ public class StudentService {
 	
 	public Student update(Long id, Student obj) {
 		Student entity = repository.getReferenceById(id);
-		updateData(entity, id);
+		updateData(entity, obj);
 		return repository.save(entity);
 	}
 
-	private void updateData(Student entity, Long id) {
-		entity.setName(findById(id).getName());
-		entity.setCpf(findById(id).getCpf());
-		entity.setBirthDate(findById(id).getBirthDate());
+	private void updateData(Student entity, Student obj) {
+		entity.setName(obj.getName());
+		entity.setCpf(obj.getCpf());
+		entity.setBirthDate(obj.getBirthDate());
 	}
 }

@@ -62,25 +62,29 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		Course course1 = new Course(null, "ADS", 6, 10000.0);
+		Course course2 = new Course(null, "Data Science", 6, 10000.0);
 		
-		courseRepository.save(course1);
+		courseRepository.saveAll(Arrays.asList(course1, course2));
 		
+		CourseClass cc2 = new CourseClass(null, 2, new Date(), 40, course2);
 		CourseClass cc1 = new CourseClass(null, 1, new Date(), 40, course1);
-		ccRepository.save(cc1);
+		ccRepository.saveAll(Arrays.asList(cc1, cc2));
 		
+		course2.addCourseClass(cc2);
 		course1.addCourseClass(cc1);
-		courseRepository.save(course1);
+		courseRepository.saveAll(Arrays.asList(course2, course1));
 		
 		Teacher tch1 = new Teacher(null, "Vesemir", "987654321");
+		Teacher tch2 = new Teacher(null, "Eddard Stark", "123456789");
 		
-		tchRepository.save(tch1);
+		tchRepository.saveAll(Arrays.asList(tch1, tch2));
 		
 		Subject sbj1 = new Subject(null, "Estatística", "Mexer com gráfico e tabela", 7.0, tch1);
-		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação", 7.0, tch1);
+		Subject sbj2 = new Subject(null, "Python", "Fazer if e else com identação e achar que python é religião", 7.0, tch2);
 		
 		tch1.addSubject(sbj1);
-		tch1.addSubject(sbj2);
-		tchRepository.save(tch1);
+		tch2.addSubject(sbj2);
+		tchRepository.saveAll(Arrays.asList(tch1, tch2));
 		
 		sbRepository.saveAll(Arrays.asList(sbj1, sbj2));
 		
@@ -97,21 +101,26 @@ public class TestConfig implements CommandLineRunner {
 			
 		SubjectRegistration sr1 = new SubjectRegistration(course1, sbj1);
 		SubjectRegistration sr2 = new SubjectRegistration(course1, sbj2);
-		srRepository.saveAll(Arrays.asList(sr1, sr2));
+		
+		SubjectRegistration sr3 = new SubjectRegistration(course2, sbj2);
+		SubjectRegistration sr4 = new SubjectRegistration(course2, sbj1);
+		srRepository.saveAll(Arrays.asList(sr1, sr2, sr3, sr4));
 		
 		course1.addSubject(sr1);
 		course1.addSubject(sr2);
-		courseRepository.save(course1);
+		course2.addSubject(sr3);
+		course2.addSubject(sr4);
+		courseRepository.saveAll(Arrays.asList(course2, course1));
 		
 		Registration rg1 = new Registration(null);
 		Registration rg2 = new Registration(null);
 		rg1.setCourseClass(cc1);
-		rg2.setCourseClass(cc1);
+		rg2.setCourseClass(cc2);
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
 		
 		cc1.addRegistration(rg1);
-		cc1.addRegistration(rg2);
-		ccRepository.save(cc1);
+		cc2.addRegistration(rg2);
+		ccRepository.saveAll(Arrays.asList(cc1, cc2));
 		
 		Student st1 = new Student(null, "Geralt of Rivia", "123456789", new Date(), rg1);
 		Student st2 = new Student(null, "Eskel", "123456789", new Date(), rg2);
@@ -125,7 +134,7 @@ public class TestConfig implements CommandLineRunner {
 		rgRepository.saveAll(Arrays.asList(rg1, rg2));
 		
 		StudentTest stt1 = new StudentTest(tst1, st1);
-		StudentTest stt2 = new StudentTest(tst1, st2);
+		StudentTest stt2 = new StudentTest(tst2, st2);
 		
 		sttsRepository.saveAll(Arrays.asList(stt1, stt2));
 	}
