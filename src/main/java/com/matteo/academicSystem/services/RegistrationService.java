@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
+import com.matteo.academicSystem.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class RegistrationService {
@@ -21,6 +22,6 @@ public class RegistrationService {
 	
 	public Registration findById(Long id) {
 		Optional<Registration> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 }
