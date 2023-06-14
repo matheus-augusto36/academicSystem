@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.matteo.academicSystem.entities.Teacher;
 import com.matteo.academicSystem.repositories.TeacherRepository;
+import com.matteo.academicSystem.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class TeacherService {
@@ -21,6 +22,6 @@ public class TeacherService {
 	
 	public Teacher findById(Long id) {
 		Optional<Teacher> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 }

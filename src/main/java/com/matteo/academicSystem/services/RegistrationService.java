@@ -24,4 +24,9 @@ public class RegistrationService {
 		Optional<Registration> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
+	
+	public Registration insert(Registration obj) {
+		return repository.save(obj);
+	}
+	
 }
