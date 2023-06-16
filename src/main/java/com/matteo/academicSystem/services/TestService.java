@@ -23,4 +23,8 @@ public class TestService {
 		Optional<Test> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public Test insert(Test obj) {
+		return repository.save(obj);
+	}
 }
