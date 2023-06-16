@@ -24,4 +24,9 @@ public class TeacherService {
 		Optional<Teacher> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
+	
+	public Teacher insert(Teacher entity) {
+		return repository.save(entity);
+	}
+	
 }
