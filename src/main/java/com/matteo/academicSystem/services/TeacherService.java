@@ -42,4 +42,19 @@ public class TeacherService {
 		}
 	}
 	
+	public Teacher update(Long id, Teacher obj) {
+		try {
+			Teacher entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+	
+	private void updateData(Teacher entity, Teacher obj) {
+		entity.setCpf(obj.getCpf());
+		entity.setName(obj.getName());	
+	}
+	
 }
