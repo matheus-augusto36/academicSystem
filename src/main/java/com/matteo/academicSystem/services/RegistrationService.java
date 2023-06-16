@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.matteo.academicSystem.entities.Registration;
+import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
 import com.matteo.academicSystem.services.exceptions.DatabaseException;
 import com.matteo.academicSystem.services.exceptions.ResourceNotFoundException;
@@ -43,5 +44,20 @@ public class RegistrationService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
+	}
+	
+	public Registration update(Long id, Registration obj) {
+		try {
+			Registration entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+
+	private void updateData(Registration entity, Registration obj) {
+		entity.setStudent(obj.getStudent());
+		entity.setCourseClass(obj.getCourseClass());
 	}
 }

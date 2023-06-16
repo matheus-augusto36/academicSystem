@@ -25,7 +25,7 @@ public class Registration implements Serializable {
 	@OneToOne(mappedBy = "registration")
 	private Student student;
 	
-	@JsonIgnore
+
 	@ManyToOne
 	@JoinColumn(name = "courseClass_id")
 	private CourseClass courseClass;

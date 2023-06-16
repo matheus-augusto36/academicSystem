@@ -28,6 +28,7 @@ public class CourseClass implements Serializable {
 	private Date startDate;
 	private Integer vacancies;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "courseClass")
 	private List<Registration> registrations = new ArrayList<>();
 	
