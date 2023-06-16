@@ -4,10 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.matteo.academicSystem.entities.Registration;
 import com.matteo.academicSystem.repositories.RegistrationRepository;
+import com.matteo.academicSystem.services.exceptions.DatabaseException;
 import com.matteo.academicSystem.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -29,4 +35,13 @@ public class RegistrationService {
 		return repository.save(obj);
 	}
 	
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+	}
 }
