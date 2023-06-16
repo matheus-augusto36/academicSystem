@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.matteo.academicSystem.entities.Teacher;
 import com.matteo.academicSystem.entities.Test;
 import com.matteo.academicSystem.repositories.TestRepository;
 import com.matteo.academicSystem.services.exceptions.DatabaseException;
@@ -41,4 +42,22 @@ public class TestService {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
+	
+	public Test update(Long id, Test obj) {
+		try {
+			Test entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+	
+	private void updateData(Test entity, Test obj) {
+		entity.setClassification(obj.getClassification());
+		entity.setDate(obj.getDate());
+		entity.setScore(obj.getScore());
+		entity.setSubject(obj.getSubject());
+	}
+	
 }
