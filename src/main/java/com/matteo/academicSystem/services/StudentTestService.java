@@ -23,4 +23,9 @@ public class StudentTestService {
 		Optional<StudentTest> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public StudentTest insert(StudentTest entity) {
+		return repository.save(entity);
+	}
+	
 }

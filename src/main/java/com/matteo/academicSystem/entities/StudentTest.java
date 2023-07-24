@@ -25,6 +25,10 @@ public class StudentTest {
 		id.setStudent(student);
 	}
 	
+	public StudentTestPK getId() {
+		return id;
+	}
+	
 	@JsonIgnore
 	public Test getTest() {
 		return id.getTest();
