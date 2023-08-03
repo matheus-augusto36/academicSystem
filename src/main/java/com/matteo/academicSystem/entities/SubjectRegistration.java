@@ -34,8 +34,16 @@ public class SubjectRegistration {
 		return id.getCourse();
 	}
 	
+	public void setCourse(Course course) {
+		id.setCourse(course);
+	}
+	
 	public Subject getSubject() {
 		return id.getSubject();
+	}
+	
+	public void setSubject(Subject subject) {
+		id.setSubject(subject);
 	}
 
 	@Override

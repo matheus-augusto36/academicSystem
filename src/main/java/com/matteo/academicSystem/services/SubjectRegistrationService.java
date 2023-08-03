@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.matteo.academicSystem.entities.CourseClass;
 import com.matteo.academicSystem.entities.SubjectRegistration;
 import com.matteo.academicSystem.repositories.SubjectRegistrationRepository;
 import com.matteo.academicSystem.services.exceptions.DatabaseException;
@@ -40,5 +41,20 @@ public class SubjectRegistrationService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
+	}
+	
+	public SubjectRegistration update(Long id, SubjectRegistration obj) {
+		try {
+			SubjectRegistration entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+	
+	private void updateData(SubjectRegistration entity, SubjectRegistration obj) {
+		entity.setCourse(obj.getCourse());
+		entity.setSubject(obj.getSubject());
 	}
 }

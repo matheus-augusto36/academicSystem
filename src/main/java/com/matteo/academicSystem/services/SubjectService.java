@@ -43,5 +43,22 @@ public class SubjectService {
 		}
 	}
 	
+	public Subject update(Long id, Subject obj) {
+		try {
+			Subject entity = repository.getReferenceById(id);
+			updateData(entity, obj);
+			return repository.save(entity);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+	
+	private void updateData(Subject entity, Subject obj) {
+		entity.setDescription(obj.getDescription());
+		entity.setMinimumScore(obj.getMinimumScore());
+		entity.setName(obj.getName());
+		entity.setTeacher(obj.getTeacher());
+	}
+	
 
 }
