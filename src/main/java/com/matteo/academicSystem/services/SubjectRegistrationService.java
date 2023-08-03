@@ -25,4 +25,8 @@ public class SubjectRegistrationService {
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
+	public SubjectRegistration insert(SubjectRegistration entity) {
+		return repository.save(entity);
+	}
+	
 }

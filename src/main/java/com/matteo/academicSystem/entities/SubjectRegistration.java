@@ -25,6 +25,10 @@ public class SubjectRegistration {
 		id.setSubject(subject);
 	}
 	
+	public SubjectRegistrationPK getId() {
+		return id;
+	}
+	
 	@JsonIgnore
 	public Course getCourse() {
 		return id.getCourse();
